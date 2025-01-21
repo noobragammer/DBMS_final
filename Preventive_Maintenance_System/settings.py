@@ -37,7 +37,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'equipment_manager',
+    'file_maintenance',
+    'home',
+    'inbox',
+    'login',
+    'reports_board',
+    'task_manager',
 ]
+
+
+AUTH_USER_MODEL = 'login.CustomUser'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+
+LOGIN_URL = '/login/'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
