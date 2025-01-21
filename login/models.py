@@ -1,9 +1,10 @@
-
 import uuid
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+# create database model for user
 class CustomUser(AbstractUser):
+    #Roles are for access limitations
     ROLE_CHOICES = [
         ('Technician', 'Technician'),
         ('Employee', 'Employee'),
