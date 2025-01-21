@@ -40,19 +40,19 @@ INSTALLED_APPS = [
     'equipment_manager',
     'file_maintenance',
     'home',
-    # 'login',
+    'login',
     'inbox',
     'reports_board',
     'task_manager',
 ]
 
-# AUTH_USER_MODEL = 'login.CustomUser'
+AUTH_USER_MODEL = 'login.CustomUser'
 
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
 
-# LOGIN_URL = '/login/'
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+LOGIN_URL = '/login/'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 
@@ -132,6 +132,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Where your app's static files are located
