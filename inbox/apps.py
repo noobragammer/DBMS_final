@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AssignatoriesConfig(AppConfig):
+class InboxConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'assignatories'
+    name = 'inbox'
