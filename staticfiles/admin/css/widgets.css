@@ -532,6 +532,7 @@ span.clearable-file-input label {
 .calendarbox .calendarnav-next:focus,
 .calendarbox .calendarnav-next:hover {
     background-position: 0 -45px;
+
 }
 
 .calendar-cancel {

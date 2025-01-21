@@ -40,12 +40,11 @@ INSTALLED_APPS = [
     'equipment_manager',
     'file_maintenance',
     'home',
-    'inbox',
     'login',
+    'inbox',
     'reports_board',
     'task_manager',
 ]
-
 
 AUTH_USER_MODEL = 'login.CustomUser'
 
@@ -73,7 +72,7 @@ ROOT_URLCONF = 'Preventive_Maintenance_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,9 +133,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Where your app's static files are located
+STATIC_ROOT = BASE_DIR / 'staticfiles'   # Directory where static files will be collected
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

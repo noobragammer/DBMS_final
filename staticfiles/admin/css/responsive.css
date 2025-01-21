@@ -173,7 +173,13 @@ input[type="submit"], button {
     label {
         font-size: 0.875rem;
     }
-
+        font-size: 1rem;
+    }
+    /*
+    Minifiers remove the default (text) "type" attribute from "input" HTML
+    tags. Add input:not([type]) to make the CSS stylesheet work the same.
+    */
+    .form-row input:not([type]),
     .form-row input[type=text],
     .form-row input[type=password],
     .form-row input[type=email],
@@ -187,7 +193,7 @@ input[type="submit"], button {
         margin: 0;
         padding: 6px 8px;
         min-height: 2.25rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
 
     .form-row select {
@@ -446,6 +452,7 @@ input[type="submit"], button {
 @media (max-width: 767px) {
     /* Layout */
 
+
     #header, #content, #footer {
         padding: 15px;
     }
@@ -453,7 +460,6 @@ input[type="submit"], button {
     #footer:empty {
         padding: 0;
     }
-
     div.breadcrumbs {
         padding: 10px 15px;
     }

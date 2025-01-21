@@ -1,4 +1,5 @@
-All icons are taken from Font Awesome (http://fontawesome.io/) project.
+
+All icons are taken from Font Awesome (https://fontawesome.com/) project.
 The Font Awesome font is licensed under the SIL OFL 1.1:
 - https://scripts.sil.org/OFL
 
