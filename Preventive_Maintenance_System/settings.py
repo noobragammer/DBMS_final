@@ -40,20 +40,19 @@ INSTALLED_APPS = [
     'equipment_manager',
     'file_maintenance',
     'home',
+    # 'login',
     'inbox',
-    'login',
     'reports_board',
     'task_manager',
 ]
 
+# AUTH_USER_MODEL = 'login.CustomUser'
 
-AUTH_USER_MODEL = 'login.CustomUser'
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
-
-LOGIN_URL = '/login/'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# LOGIN_URL = '/login/'
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 
 
@@ -72,7 +71,7 @@ ROOT_URLCONF = 'Preventive_Maintenance_System.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +132,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Where your app's static files are located
+STATIC_ROOT = BASE_DIR / 'staticfiles'   # Directory where static files will be collected
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
