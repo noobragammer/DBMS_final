@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'login.middleware.RoleBasedAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'Preventive_Maintenance_System.urls'
