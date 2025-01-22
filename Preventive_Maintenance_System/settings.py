@@ -46,15 +46,6 @@ INSTALLED_APPS = [
     'task_manager',
 ]
 
-AUTH_USER_MODEL = 'login.CustomUser'
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
-
-LOGIN_URL = '/login/'
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'login.middleware.RoleBasedAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'Preventive_Maintenance_System.urls'
