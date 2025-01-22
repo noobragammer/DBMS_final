@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/task.css' %}">
+    <style>
+        .navbar {
+            background-color: #e3e3e3;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="City of Toledo Logo">
+        </div>
+        <h1>Preventive Maintenance System</h1>
+        <div class="admin-profile">
+            <span>ADMIN</span>
+            <img src="{% static 'images/profile.png' %}" alt="Admin Profile">
+        </div>
+    </div>
+
+    <div class="navbar">
+        <a href="{% url 'dashboard' %}">Home</a>
+        <a href="{% url 'equipment' %}">Equipment</a>
+        <a href="{% url 'task' %}" class="active">Task Manager</a>
+        <a href="{% url 'report' %}" class="active">Reports</a>
+        <a href="#">User Manager</a>
+        <a href="#">File Maintenance</a>
+    </div>
+
+    <div class="content">
+        <h2>Task Manager</h2>
+        <button class="add-task">+ Add Task</button>
+
+        <div class="search-filter">
+            <input type="text" class="search" placeholder="Search..." class="search-bar">
+            <button class="filter">Filter</button>
+        </div>
+
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Equipment</th>
+                    <th>Category</th>
+                    <th>Request Form</th>
+                    <th>Technician</th>
+                    <th>Maintenance Date</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Xyron Newell Y. Relon</td>
+                    <td>Keyboard</td>
+                    <td>Hardware</td>
+                    <td><a href="#">request.pdf</a></td>
+                    <td>Jaffy Myll Fuentes</td>
+                    <td></td>
+                    <td>Low</td>
+                    <td>Approved</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="edit">Edit</button>
+                            <button class="view">View</button>
+                            <button class="delete">Delete</button>
+                            <button class="approve">Approve</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

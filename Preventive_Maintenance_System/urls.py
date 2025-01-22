@@ -21,4 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', include('login.urls')),
     path('', include('home.urls')),
+    path('equipment_manager/', include('equipment_manager.urls')),
+    path('task_manager', include('task_manager.urls')),
+    path('reports_board', include('reports_board.urls')),
 ]
