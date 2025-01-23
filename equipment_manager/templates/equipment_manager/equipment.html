@@ -42,9 +42,9 @@
     </div>
     <div class="navbar">
         <a href="{% url 'dashboard' %}">Home</a>
-        <a href="{% url 'equipment' %}">Equipment</a>
-        <a href="{% url 'task' %}" class="active">Task Manager</a>
-        <a href="{% url 'report' %}" class="active">Reports</a>
+        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
+        <a href="{% url 'task_manager:task' %}" class="active">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}" class="active">Reports</a>
         <a href="#">User Manager</a>
         <a href="#">File Maintenance</a>
     </div>
