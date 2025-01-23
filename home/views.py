@@ -8,5 +8,5 @@ def get_events(request):
     ]
     return JsonResponse(events, safe=False)
 
-def dashboard_view(request):
+def dashboard(request):
     return render(request, 'home/dashboard.html')
