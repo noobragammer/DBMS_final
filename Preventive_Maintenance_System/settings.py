@@ -40,20 +40,11 @@ INSTALLED_APPS = [
     'equipment_manager',
     'file_maintenance',
     'home',
-    # 'login',
+    'login',
     'inbox',
     'reports_board',
     'task_manager',
 ]
-
-# AUTH_USER_MODEL = 'login.CustomUser'
-
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True 
-
-# LOGIN_URL = '/login/'
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
 
 
 MIDDLEWARE = [
@@ -64,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'login.middleware.RoleBasedAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'Preventive_Maintenance_System.urls'

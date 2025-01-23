@@ -35,9 +35,10 @@
         background-position: calc(100% - 8px) 9px;
     }
 
-    [dir="rtl"] .selector .selector-filter label {
+
+    [dir="rtl"] .related-widget-wrapper-link + .selector {
         margin-right: 0;
-        margin-left: 8px;
+        margin-left: 15px;
     }
 
     [dir="rtl"] .object-tools li {
@@ -53,6 +54,7 @@
         padding-left: 0;
         padding-right: 16px;
     }
+
 
     [dir="rtl"] .selector-add {
         background-position: 0 -80px;
@@ -92,6 +94,7 @@
     [dir="rtl"] .aligned .vCheckboxLabel {
         padding: 1px 5px 0 0;
     }
+
 
     [dir="rtl"] .selector-remove {
         background-position: 0 0;

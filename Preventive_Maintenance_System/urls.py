@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,7 @@ urlpatterns = [
     path('equipment_manager/', include('equipment_manager.urls')),
     path('task_manager', include('task_manager.urls')),
     path('reports_board', include('reports_board.urls')),
+    path('login/', include('login.urls')),
+    path('', lambda request: redirect('login/', permanent=False)), 
+    path('home/', include('home.urls')),
 ]
