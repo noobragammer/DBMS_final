@@ -12,7 +12,7 @@ def manage_equipment(request):
         "equipment_list": equipment_list
     }
 
-    return render(request, "equipment/manage_equipment.html", context)
+    return render(request, "equipment_manager/equipment.html", context)
 
 def equipment(request):
     return render(request, "equipment_manager/equipment.html")  # New view for equipment.html
