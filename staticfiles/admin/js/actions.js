@@ -1,3 +1,4 @@
+
 /*global gettext, interpolate, ngettext, Actions*/
 'use strict';
 {
