@@ -10,3 +10,6 @@ from django.contrib.sessions.models import Session
 
 def login(request):
     return render(request, 'login/login.html')
+
+def register(request):
+    return render(request, 'login/register.html')

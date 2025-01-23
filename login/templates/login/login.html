@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
     <div class="container">
@@ -18,7 +18,7 @@
         <!-- Right Section -->
         <div class="right-section">
             <h2>Login</h2>
-            <p style="text-align:center;">Doesn't have an account yet? <a href="{% url 'home:dashboard_view' %}">Sign Up</a></p>
+            <p style="text-align:center;">Doesn't have an account yet? <a href="{% url 'login:register' %}">Sign Up</a></p>
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
