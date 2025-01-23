@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preventive Maintenance System</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.js"></script>
     <style>
@@ -48,10 +48,10 @@
     </div>
 
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Equipment</a>
-        <a href="#">Task Manager</a>
-        <a href="#">Reports</a>
+        <a href="{% url 'dashboard' %}">Home</a>
+        <a href="{% url 'equipment' %}">Equipment</a>
+        <a href="{% url 'task' %}" class="active">Task Manager</a>
+        <a href="{% url 'report' %}" class="active">Reports</a>
         <a href="#">User Manager</a>
         <a href="#">File Maintenance</a>
     </div>

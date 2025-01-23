@@ -20,6 +20,11 @@ from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('login/', include('login.urls')),
+    path('', include('home.urls')),
+    path('equipment_manager/', include('equipment_manager.urls')),
+    path('task_manager', include('task_manager.urls')),
+    path('reports_board', include('reports_board.urls')),
     path('login/', include('login.urls')),
     path('', lambda request: redirect('login/', permanent=False)), 
     path('home/', include('home.urls')),
