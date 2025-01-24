@@ -21,15 +21,14 @@ from django.shortcuts import redirect
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', lambda request: redirect('login/', permanent=False)), 
     path('admin/', admin.site.urls),
-    # path('login/', include('login.urls')),
     path('file_maintenance/', include('file_maintenance.urls')),
     path('user_manager/', include('user_manager.urls')),
     path('equipment_manager/', include('equipment_manager.urls')),
     path('task_manager/', include('task_manager.urls')),
     path('reports_board/', include('reports_board.urls')),
     path('login/', include('login.urls')),
-    path('', lambda request: redirect('login/', permanent=False)), 
     path('inbox/', include('inbox.urls')),
     path('home/', include('home.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
