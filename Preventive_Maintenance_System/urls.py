@@ -29,5 +29,6 @@ urlpatterns = [
     path('task_manager/', include('task_manager.urls')),
     path('reports_board/', include('reports_board.urls')),
     path('login/', include('login.urls')),
+    path('inbox/', include('inbox.urls')),
     path('home/', include('home.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
