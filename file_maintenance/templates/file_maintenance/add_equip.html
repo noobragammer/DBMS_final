@@ -5,8 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reports</title>
-    <link rel="stylesheet" href="{% static 'css/report.css' %}">
+    <title>Add Equipment</title>
+    <link rel="stylesheet" href="{% static 'css/add_e.css' %}">
     <style>
         .navbar {
             background-color: #e3e3e3;
@@ -55,12 +55,12 @@
             </div>
         </div>
     </div>
-    <div class="navbar">
+    <nav class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
         <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task_manager' %}" class="active">Task Manager</a>
-        <a href="{% url 'reports_board:report' %}" class="active">Reports</a>
-        <a href="{% url 'user_manager:user' %}" class="active">User Manager</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
@@ -68,61 +68,57 @@
                 <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="content">
-        <h2>Reports</h2>
-        <div class="search-filter">
-            <input type="text" class="search" placeholder="Search..." class="search-bar">
-        </div>
+    <main>
+        <h2>Equipment Maintenance</h2>
+    
+        <section class="form-container">
+            <h3>Add Equipment</h3>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" placeholder="Enter equipment name">
+                </div>
 
-        <table class="report-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Equipment</th>
-                    <th>Category</th>
-                    <th>Request Form</th>
-                    <th>Technician</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Maintenance Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Xyron Newell Y. Relon</td>
-                    <td>Keyboard</td>
-                    <td>Hardware</td>
-                    <td><a href="#">request.pdf</a></td>
-                    <td>Jaffy Myll Fuentes</td>
-                    <td>Low</td>
-                    <td>Approved</td>
-                    <td>-</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="view">View</button>
-                            <button class="delete">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <div class="form-group">
+                    <label for="owner">Owner:</label>
+                    <input type="text" id="owner" placeholder="Enter owner name">
+                </div>
 
-        <div class="details">
-            <p><strong>Name:</strong> Xyron Newell Y. Relon</p>
-            <p><strong>Equipment:</strong> Keyboard</p>
-            <p><strong>Category:</strong> Hardware</p>
-            <p><strong>Request Form:</strong> <a href="#">request.pdf</a></p>
-            <p><strong>Technician:</strong> Jaffy Myll Fuentes</p>
-            <p><strong>Priority:</strong> Low</p>
-            <p><strong>Status:</strong> Approved</p>
-            <p><strong>Maintenance Date:</strong> -</p>
-        </div>
-    </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category">
+                        <option value="software">Software</option>
+                        <option value="hardware">Hardware</option>
+                        <option value="utility">Utility</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="frequency">Frequency:</label>
+                    <select id="frequency">
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-add">Add</button>
+                    <button type="button" class="btn-cancel">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById("dropdown-menu");

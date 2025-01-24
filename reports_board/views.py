@@ -4,7 +4,7 @@ def report_view(request):
     # Example data to populate the reports table and details section
     reports = [
         {
-            'serial_no': 'IT01',
+            'ID': '1',
             'name': 'Xyron Newell Y. Relon',
             'equipment': 'Keyboard',
             'category': 'Hardware',

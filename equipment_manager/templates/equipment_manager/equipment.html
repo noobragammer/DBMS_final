@@ -28,7 +28,6 @@
     </style>
 </head>
 
-
 <body>
     <div class="header">
         <div class="logo">
@@ -37,92 +36,105 @@
         <h1>Preventive Maintenance System</h1>
         <div class="admin-profile">
             <span>ADMIN</span>
-            <img src="{% static 'profile.png' %}" alt="Admin Profile">
+            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon"
+                onclick="toggleDropdown()">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <div class="dropdown-header">
+                    <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="dropdown-profile-icon">
+                    <span>ADMIN</span>
+                </div>
+                <hr>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-profile"></i> Profile
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-settings"></i> Account Settings
+                </a>
+                <a href="#" class="dropdown-item logout">
+                    <i class="icon-logout"></i> Logout
+                </a>
+            </div>
         </div>
     </div>
+
     <div class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
-        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task' %}" class="active">Task Manager</a>
-        <a href="{% url 'reports_board:report' %}" class="active">Reports</a>
-        <a href="#">User Manager</a>
-        <a href="#">File Maintenance</a>
+        <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
+        <div class="dropdown">
+            <button class="dropbtn">File Maintenance</button>
+            <div class="dropdown-content">
+                <a href="{% url 'file_maintenance:user_maintenance' %}">User Maintenance</a>
+                <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
+            </div>
+        </div>
     </div>
 
     <div class="content">
         <h2>Equipment List</h2>
-            <div class="search-filter">
-                <input type="text" class="search" placeholder="Search..." class="search-bar">
-                <button class="filter">Filter</button>
-
-                <div class="filter-options">
-                    <label>Category:</label>
-                    <input type="radio" name="category" value="all" checked> All
-                    <input type="radio" name="category" value="software"> Software
-                    <input type="radio" name="category" value="hardware"> Hardware
-                    <input type="radio" name="category" value="utility"> Utility
-
-                    <label>Date:</label>
-                    <input type="checkbox" value="2025"> 2025
-                    <input type="checkbox" value="2024" checked> 2024
-                    <input type="checkbox" value="2023"> 2023
-                    <input type="checkbox" value="2022"> 2022
-                    <input type="checkbox" value="older"> Older
-
-                    <label>Status:</label>
-                    <input type="radio" name="status" value="all" checked> All
-                    <input type="radio" name="status" value="active"> Active
-                    <input type="radio" name="status" value="inactive"> Inactive
-
-                    <button class="apply-filter">Apply Filter</button>
-                    <button class="close-filter">Close</button>
-                </div>
-            </div>
-
-            <table class="equipment-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Frequency</th>
-                        <th>Status</th>
-                        <th>View</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Keyboard</td>
-                        <td>Hardware</td>
-                        <td>2024</td>
-                        <td>Monthly</td>
-                        <td>Active</td>
-                        <td><button>▼</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Microsoft Office</td>
-                        <td>Software</td>
-                        <td>2024</td>
-                        <td>Monthly</td>
-                        <td>Active</td>
-                        <td><button>▼</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Aircon</td>
-                        <td>Utility</td>
-                        <td>2012</td>
-                        <td>Yearly</td>
-                        <td>Active</td>
-                        <td><button>▼</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="search-filter">
+            <input type="text" class="search" placeholder="Search..." class="search-bar">
         </div>
+
+        <table class="equipment-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Frequency</th>
+                    <th>Status</th>
+                    <th>View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Keyboard</td>
+                    <td>Hardware</td>
+                    <td>2024</td>
+                    <td>Monthly</td>
+                    <td>Active</td>
+                    <td><button>▼</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Microsoft Office</td>
+                    <td>Software</td>
+                    <td>2024</td>
+                    <td>Monthly</td>
+                    <td>Active</td>
+                    <td><button>▼</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Aircon</td>
+                    <td>Utility</td>
+                    <td>2012</td>
+                    <td>Yearly</td>
+                    <td>Active</td>
+                    <td><button>▼</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    </div>
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdown-menu");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        window.addEventListener("click", function (event) {
+            const dropdown = document.getElementById("dropdown-menu");
+            if (!event.target.closest(".admin-profile")) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" href="{% static 'css/add_e.css' %}">
+    <style>
+        .navbar {
+            background-color: #e3e3e3;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .file-hint {
+            font-size: 0.8em;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="City of Toledo Logo">
+        </div>
+        <h1>Preventive Maintenance System</h1>
+        <div class="admin-profile">
+            <span>ADMIN</span>
+            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon" onclick="toggleDropdown()">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <div class="dropdown-header">
+                    <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="dropdown-profile-icon">
+                    <span>ADMIN</span>
+                </div>
+                <hr>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-profile"></i> Profile
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-settings"></i> Account Settings
+                </a>
+                <a href="#" class="dropdown-item logout">
+                    <i class="icon-logout"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <a href="{% url 'home:dashboard' %}">Home</a>
+        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
+        <div class="dropdown">
+            <button class="dropbtn">File Maintenance</button>
+            <div class="dropdown-content">
+                <a href="{% url 'file_maintenance:user_maintenance' %}" class="active">User Maintenance</a>
+                <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <h2>User Maintenance</h2>
+
+        <section class="form-container">
+            <h3>Add User</h3>
+            <form enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter first name">
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter last name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label for="contact_no">Contact no.:</label>
+                    <input type="text" id="contact_no" name="contact_no" placeholder="Enter contact number">
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="category">
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                        <option value="technician">Technician</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password">
+                </div>
+
+                <div class="form-group">
+                    <label for="signature">Signature:</label>
+                    <input type="file" id="signature" name="signature" accept="image/png">
+                    <p class="file-hint">Only png file allowed to upload here.</p>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-add">ADD</button>
+                    <button type="button" class="btn-cancel">CANCEL</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdown-menu");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        window.addEventListener("click", function (event) {
+            const dropdown = document.getElementById("dropdown-menu");
+            if (!event.target.closest(".admin-profile")) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
+</body>
+
+</html>
