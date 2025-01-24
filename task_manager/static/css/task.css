@@ -56,6 +56,110 @@ body {
     color: #007bff;
 }
 
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 200px;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dropdown-header span {
+    font-weight: bold;
+    color: #333;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dropdown-item i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.logout {
+    color: #d9534f;
+}
+
+.logout:hover {
+    background-color: #ffe6e6;
+}
+
+/* File Maintenance dropdown */
+.navbar .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar .dropbtn {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(249, 249, 249, 0.9);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 0; /* Remove any extra padding */
+    margin: 0; /* Remove extra margins */
+    border: 1px solid #ccc;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+    width: auto;
+    background-color: rgba(249, 249, 249, 0.6);
+}
+
+.dropdown-content a {
+    padding: 8px 12px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(0, 123, 255, 0.2);
+    color: #fff;
+}
+
 .content {
     padding: 20px;
 }
@@ -67,7 +171,7 @@ h2 {
 }
 
 .add-task {
-    background-color: #4caf50;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 15px;
@@ -77,7 +181,7 @@ h2 {
 }
 
 .add-task:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .search-filter {
@@ -100,19 +204,6 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 10px;
-}
-
-.search-filter .filter {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.search-filter .filter:hover {
-    background-color: #0056b3;
 }
 
 .task-table {
@@ -178,5 +269,13 @@ h2 {
 
 .action-buttons .approve:hover {
     background-color: #e8f5e9;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 

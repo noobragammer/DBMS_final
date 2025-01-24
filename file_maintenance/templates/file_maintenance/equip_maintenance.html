@@ -1,11 +1,12 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users</title>
-    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+    <title>Equipment Maintenance</title>
+    <link rel="stylesheet" href="{% static 'css/equip_m.css' %}">
     <style>
         .navbar {
             background-color: #e3e3e3;
@@ -26,6 +27,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div class="logo">
@@ -56,9 +58,9 @@
     <div class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
         <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task_manager' %}" class="active">Task Manager</a>
-        <a href="{% url 'reports_board:report' %}" class="active">Reports</a>
-        <a href="{% url 'user_manager:user' %}" class="active">User Manager</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
@@ -67,70 +69,87 @@
             </div>
         </div>
     </div>
-    
+
     <div class="content">
-        <h2>Manage Users</h2>
+        <h2>Equipment Maintenance</h2>
+        <form action="{% url 'file_maintenance:add_equipment' %}" method="get">
+            <button type="submit" class="add-button">+ Add Equipment</button>
+        </form>
         <div class="search-filter">
-            <input type="text" class="search" placeholder="Search..." class="search-bar">
+            <input type="text" class="search" placeholder="Search...">
         </div>
 
-        <table class="user-table">
+        <table class="equipment-table">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
-                    <th>Role</th>
-                    <th>Equipment</th>
-                    <th>Task Manager</th>
-                    <th>Reports</th>
-                    <th>User Manager</th>
-                    <th>File Maintenance</th>
+                    <th>Owner</th>
+                    <th>Category</th>
+                    <th>Frequency</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td>Gibe Bartelome</td>
-                    <td>Admin</td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
+                    <td>Keyboard</td>
+                    <td>Xyron Newell Relon</td>
+                    <td>Hardware</td>
+                    <td>Monthly</td>
+                    <td>Active</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="details">
+                    <td colspan="7">
+                        <p><strong>Name:</strong> Keyboard</p>
+                        <p><strong>Owner:</strong> Xyron Newell Relon</p>
+                        <p><strong>Category:</strong> Hardware</p>
+                        <p><strong>Frequency:</strong> Monthly</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="edit-actions">
+                            <button class="save">SAVE</button>
+                            <button class="cancel">CANCEL</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Xyron Newell Y. Relon</td>
-                    <td>User</td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
+                    <td>Microsoft Office</td>
+                    <td>Xyron Newell Relon</td>
+                    <td>Software</td>
+                    <td>Monthly</td>
+                    <td>Active</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Jaffy Myll Fuentes</td>
-                    <td>Technician</td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Shane Agbon</td>
-                    <td>Technician</td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" checked disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
-                    <td><input type="checkbox" disabled></td>
+                    <td>Aircon</td>
+                    <td>Xyron Newell Relon</td>
+                    <td>Utility</td>
+                    <td>Yearly</td>
+                    <td>Active</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="edit">Edit</button>
+                            <button class="delete">Delete</button>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-    </main>
+    </div>
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById("dropdown-menu");
@@ -145,4 +164,5 @@
         });
     </script>
 </body>
+
 </html>

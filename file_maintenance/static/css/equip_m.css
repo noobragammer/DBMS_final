@@ -160,91 +160,140 @@ body {
     color: #fff;
 }
 
-/* Stats Section */
-.stats {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-}
-
-.stat-item {
-    flex: 1;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
+.content {
     padding: 20px;
-    margin: 0 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.stat-item i {
-    font-size: 32px;
-    color: #007bff;
-    margin-bottom: 10px;
-}
-
-.stat-item p {
-    font-size: 14px;
-    color: #666;
-    margin: 5px 0;
-}
-
-.stat-item h2 {
-    font-size: 24px;
-    color: #333;
-    margin: 5px 0;
-}
-
-/* Notification and Calendar */
-.notification-calendar {
-    display: flex;
-    justify-content: space-between;
-}
-
-.notifications,
-.calendar {
-    flex: 1;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 0 10px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.notifications h3,
-.calendar h3 {
-    font-size: 18px;
+h2 {
+    font-size: 20px;
     color: #333;
     margin-bottom: 10px;
 }
 
-.notification-item {
-    margin: 10px 0;
-}
-
-.notification-item p {
-    font-size: 14px;
-    color: #666;
-}
-
-.notification-item h4 {
-    font-size: 16px;
-    color: #333;
-}
-
-.highlight {
-    background-color: #28a745;
-    color: white;
-    padding: 5px 8px;
+.add-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
 
-/* Calendar */
-#calendar {
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+.search-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-filter .search {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.equipment-table th, .equipment-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.equipment-table th {
+    background-color: #f2f2f2;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.equipment-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.equipment-table .action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.equipment-table .action-buttons button {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.equipment-table .action-buttons button:hover {
+    background-color: #e7f3ff;
+}
+
+.equipment-table .action-buttons .delete {
+    color: #ff4d4d;
+}
+
+.equipment-table .action-buttons .delete:hover {
+    background-color: #ffe7e7;
+}
+
+.details {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
     margin-top: 10px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-actions .save {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-actions .save:hover {
+    background-color: #218838;
+}
+
+.edit-actions .cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-actions .cancel:hover {
+    background-color: #c82333;
 }
 
 /* Media Queries */
@@ -252,22 +301,5 @@ body {
     .navbar {
         flex-wrap: wrap;
         justify-content: center;
-    }
-
-    .stats {
-        flex-wrap: wrap;
-    }
-
-    .stat-item {
-        margin-bottom: 15px;
-    }
-
-    .notification-calendar {
-        flex-wrap: wrap;
-    }
-
-    .notifications,
-    .calendar {
-        margin-bottom: 20px;
     }
 }
