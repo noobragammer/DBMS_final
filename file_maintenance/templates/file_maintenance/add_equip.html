@@ -43,13 +43,13 @@
                     <span>ADMIN</span>
                 </div>
                 <hr>
-                <a href="#" class="dropdown-item">
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
                     <i class="icon-profile"></i> Profile
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="icon-settings"></i> Account Settings
                 </a>
-                <a href="#" class="dropdown-item logout">
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">
                     <i class="icon-logout"></i> Logout
                 </a>
             </div>
@@ -114,7 +114,7 @@
 
                 <div class="form-buttons">
                     <button type="submit" class="btn-add">Add</button>
-                    <button type="button" class="btn-cancel">Cancel</button>
+                    <button type="button" class="btn-cancel" onclick="redirectToEquipmentMaintenance()">Cancel</button>
                 </div>
             </form>
         </section>
@@ -131,6 +131,10 @@
                 dropdown.style.display = "none";
             }
         });
+
+        function redirectToEquipmentMaintenance() {
+            window.location.href = "{% url 'file_maintenance:equipment_maintenance' %}";
+        }
     </script>
 </body>
 

@@ -36,20 +36,21 @@
         <h1>Preventive Maintenance System</h1>
         <div class="admin-profile">
             <span>ADMIN</span>
-            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon" onclick="toggleDropdown()">
+            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon"
+                onclick="toggleDropdown()">
             <div id="dropdown-menu" class="dropdown-menu">
                 <div class="dropdown-header">
                     <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="dropdown-profile-icon">
                     <span>ADMIN</span>
                 </div>
                 <hr>
-                <a href="#" class="dropdown-item">
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
                     <i class="icon-profile"></i> Profile
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="icon-settings"></i> Account Settings
                 </a>
-                <a href="#" class="dropdown-item logout">
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">
                     <i class="icon-logout"></i> Logout
                 </a>
             </div>
@@ -118,7 +119,7 @@
 
                 <div class="form-buttons">
                     <button type="submit" class="btn-add">Add</button>
-                    <button type="button" class="btn-cancel">Cancel</button>
+                    <button type="button" class="btn-cancel" onclick="redirectToTaskManager()">Cancel</button>
                 </div>
             </form>
         </section>
@@ -135,6 +136,10 @@
                 dropdown.style.display = "none";
             }
         });
+
+        function redirectToTaskManager() {
+            window.location.href = "{% url 'task_manager:task_manager' %}";
+        }
     </script>
 </body>
 

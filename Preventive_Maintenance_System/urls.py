@@ -30,5 +30,6 @@ urlpatterns = [
     path('reports_board/', include('reports_board.urls')),
     path('login/', include('login.urls')),
     path('', lambda request: redirect('login/', permanent=False)), 
+    path('inbox/', include('inbox.urls')),
     path('home/', include('home.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
