@@ -1,50 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import EquipmentForm
+from login.models import User
+from .models import Equipment
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
+users = User.objects.all()
 
 def user_maintenance_view(request):
     # Example data for user maintenance
-    users = [
-        {
-            'id': 1,
-            'name': 'Gibe Bartolome',
-            'email': 'bartolome@gmail.com',
-            'contact': '09171234567',
-            'role': 'Admin',
-            'signature': 'signature1.png',
-            'username': 'admin',
-            'password': '*******'
-        },
-        {
-            'id': 2,
-            'name': 'Xyron Newell Y. Relon',
-            'email': 'relon@gmail.com',
-            'contact': '09181234567',
-            'role': 'User',
-            'signature': 'signature2.png',
-            'username': 'xyron',
-            'password': '*******'
-        },
-        {
-            'id': 3,
-            'name': 'Jaffy Myll Fuentes',
-            'email': 'fuentes@gmail.com',
-            'contact': '09191234567',
-            'role': 'Technician',
-            'signature': 'signature3.png',
-            'username': 'jaffy',
-            'password': '*******'
-        },
-        {
-            'id': 4,
-            'name': 'Shane Agbon',
-            'email': 'agbon@gmail.com',
-            'contact': '09161234567',
-            'role': 'Technician',
-            'signature': 'signature4.png',
-            'username': 'shane',
-            'password': '*******'
-        },
-    ]
-
     return render(request, 'file_maintenance/user_maintenance.html', {'users': users})
 
 def add_user(request):
@@ -55,47 +19,50 @@ def add_user(request):
     return render(request, 'file_maintenance/add_user.html')
 
 def equipment_maintenance_view(request):
-    # Example data for equipment maintenance
-    equipment_list = [
-        {
-            'id': 1,
-            'name': 'Keyboard',
-            'owner': 'Xyron Newell Relon',
-            'category': 'Hardware',
-            'frequency': 'Monthly',
-            'status': 'Active'
-        },
-        {
-            'id': 2,
-            'name': 'Microsoft Office',
-            'owner': 'Xyron Newell Relon',
-            'category': 'Software',
-            'frequency': 'Monthly',
-            'status': 'Active'
-        },
-        {
-            'id': 3,
-            'name': 'Aircon',
-            'owner': 'Xyron Newell Relon',
-            'category': 'Utility',
-            'frequency': 'Yearly',
-            'status': 'Active'
-        },
-    ]
+    equipments = Equipment.objects.all()
+    return render(request, 'file_maintenance/equip_maintenance.html', {'equipments': equipments})
 
-    return render(request, 'file_maintenance/equip_maintenance.html', {'equipment_list': equipment_list})
 
 def add_equipment(request):
-    """Renders the Equipment Maintenance page."""
     if request.method == 'POST':
-        name = request.POST.get('name')
-        owner = request.POST.get('owner')
-        category = request.POST.get('category')
-        frequency = request.POST.get('frequency')
-        status = request.POST.get('status')
-        # You can add logic to handle this data or display a success message.
-        print(f"Equipment added: {name}, {owner}, {category}, {frequency}, {status}")
+        form = EquipmentForm(request.POST)
+        print("POST Data:", request.POST)
+        if form.is_valid():
+            print("Saving equipment...")
+            form.save()
+            messages.success(request, "Equipment added successfully!")
+            return redirect('file_maintenance:equipment_maintenance')
+        else:
+            print("Form errors:", form.errors)
+            messages.error(request, "Failed to add equipment. Please check the form for errors.")
+    else:
+        form = EquipmentForm()
+        print("Rendering form")
+    return render(request, 'file_maintenance/add_equipment.html', {'form': form})
 
-    return render(request, 'file_maintenance/add_equip.html')
+def edit_equipment(request, equipment_id):
+    equipment = get_object_or_404(Equipment, id=equipment_id)
 
+    if request.method == 'POST':
+        form = EquipmentForm(request.POST, instance=equipment)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Equipment updated successfully!")
+            return redirect('file_maintenance:equipment_maintenance')
+        else:
+            messages.error(request, "Failed to update equipment. Please check the form for errors.")
+    else:
+        form = EquipmentForm(instance=equipment)
+
+    return render(request, 'file_maintenance/edit_equipment.html', {'form': form, 'equipment': equipment})
+
+def delete_equipment(request, equipment_id):
+    equipment = get_object_or_404(Equipment, id=equipment_id)
+
+    if request.method == 'POST':
+        equipment.delete()
+        messages.success(request, "Equipment deleted successfully!")
+        return redirect('file_maintenance:equipment_maintenance')
+
+    return render(request, 'file_maintenance/confirm_delete_equipment.html', {'equipment': equipment})
 
