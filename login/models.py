@@ -12,19 +12,21 @@ class User(models.Model):
         max_length=255,
         validators=[MinLengthValidator(8)]
     )
-    role = models.CharField(max_length=50, default='unassigned')  
+    role = models.CharField(max_length=50, choices=[
+        ('Admin', 'Admin'),
+        ('User', 'User'),
+        ('Technician', 'Technician'),
+    ])  
     signature = models.ImageField(upload_to='signatures/')
 
     def save(self, *args, **kwargs):
-        # Ensure that the first user is assigned the 'owner' role
         if not User.objects.exists():
             self.role = 'Admin'
-        
-        # Hash the password if it is not already hashed
-        if not self.password.startswith('pbkdf2_'):  # Check if the password is already hashed
-            self.password = make_password(self.password)
-        
+        if self._state.adding or 'password' in self.get_dirty_fields():
+            if not self.password.startswith('pbkdf2_'):
+                self.password = make_password(self.password)
         super().save(*args, **kwargs)
+
 
     def check_password(self, raw_password):
         """
