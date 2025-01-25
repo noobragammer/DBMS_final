@@ -45,13 +45,13 @@
                     <span>ADMIN</span>
                 </div>
                 <hr>
-                <a href="#" class="dropdown-item">
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
                     <i class="icon-profile"></i> Profile
                 </a>
                 <a href="#" class="dropdown-item">
                     <i class="icon-settings"></i> Account Settings
                 </a>
-                <a href="#" class="dropdown-item logout">
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">
                     <i class="icon-logout"></i> Logout
                 </a>
             </div>
@@ -101,17 +101,11 @@
             <div class="notifications">
                 <h3>Notification</h3>
                 <div class="notification-item">
-                    <p>New Message</p>
-                    <h4>You have <span class="highlight">3</span> new messages.</h4>
-                </div>
-                <div class="notification-item">
                     <p>Upcoming Tasks</p>
-                    <h4>You have <span class="highlight">1</span> upcoming task.</h4>
+                    <a href="{% url 'task_manager:task_manager' %}" style="text-decoration: none; color: inherit;">
+                        <h4>You have <span class="highlight">1</span> upcoming task.</h4>
+                    </a>
                 </div>
-            </div>
-            <div class="calendar">
-                <h3>Calendar</h3>
-                <div id="calendar"></div>
             </div>
         </div>
     </div>

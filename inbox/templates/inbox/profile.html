@@ -5,8 +5,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Task</title>
-    <link rel="stylesheet" href="{% static 'css/add_t.css' %}">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <style>
+        .navbar {
+            background-color: #e3e3e3;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,10 +56,11 @@
             </div>
         </div>
     </div>
-    <nav class="navbar">
+
+    <div class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
-        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task_manager' %}" class="active">Task Manager</a>
+        <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
         <a href="{% url 'reports_board:report' %}">Reports</a>
         <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
@@ -50,30 +70,44 @@
                 <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
             </div>
         </div>
-    </nav>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    </div>
 
-    <main>
-        <h2>Task Manager</h2>
-        <section class="form-container">
-            <h3>Add Task</h3>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}  
-                <div class="form-buttons">
-                    <button type="submit" class="btn-add">Add</button>
-                    <a href="{% url 'task_manager:task_manager' %}" type="button" class="btn-cancel">Cancel</a>
-                </div> 
+    <div class="profile-content">
+        <h2>Profile</h2>
+        <div class="profile-header">
+            <img src="{% static 'images/profile.png' %}" alt="Profile Picture">
+            <div>
+                <h3>Gibe Bartolome</h3>
+                <p>bartolome@gmail.com</p>
+            </div>
+        </div>
+        <form class="account-form">
+            <fieldset>
+                <legend>Account</legend>
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" value="Gibe">
 
-            </form>
-        </section>
-    </main>
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" value="Bartolome">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" value="bartolome@gmail.com">
+
+                <label for="contact">Contact</label>
+                <input type="text" id="contact" value="09171234567">
+
+                <label for="role">Role</label>
+                <input type="text" id="role" value="Admin" readonly>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" value="admin">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" value="*******">
+            </fieldset>
+        </form>
+    </div>
+
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById("dropdown-menu");
@@ -86,11 +120,6 @@
                 dropdown.style.display = "none";
             }
         });
-
-        function redirectToTaskManager() {
-            window.location.href = "{% url 'task_manager:task_manager' %}";
-        }
     </script>
 </body>
-
 </html>

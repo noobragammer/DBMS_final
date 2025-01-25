@@ -24,9 +24,15 @@
                     <span>ADMIN</span>
                 </div>
                 <hr>
-                <a href="#" class="dropdown-item">Profile</a>
-                <a href="#" class="dropdown-item">Account Settings</a>
-                <a href="#" class="dropdown-item logout">Logout</a>
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
+                    <i class="icon-profile"></i> Profile
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-settings"></i> Account Settings
+                </a>
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">
+                    <i class="icon-logout"></i> Logout
+                </a>
             </div>
         </div>
     </div>
