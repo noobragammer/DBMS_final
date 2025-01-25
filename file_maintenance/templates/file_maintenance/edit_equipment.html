@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Equipment</title>
+    <link rel="stylesheet" href="{% static 'css/add_e.css' %}">
+    <style>
+        .navbar {
+            background-color: #e3e3e3;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="City of Toledo Logo">
+        </div>
+        <h1>Preventive Maintenance System</h1>
+        <div class="admin-profile">
+            <span>ADMIN</span>
+            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon" onclick="toggleDropdown()">
+            <div id="dropdown-menu" class="dropdown-menu">
+                <div class="dropdown-header">
+                    <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="dropdown-profile-icon">
+                    <span>ADMIN</span>
+                </div>
+                <hr>
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
+                    <i class="icon-profile"></i> Profile
+                </a>
+                <a href="#" class="dropdown-item">
+                    <i class="icon-settings"></i> Account Settings
+                </a>
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">
+                    <i class="icon-logout"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar">
+        <a href="{% url 'home:dashboard' %}">Home</a>
+        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
+        <div class="dropdown">
+            <button class="dropbtn">File Maintenance</button>
+            <div class="dropdown-content">
+                <a href="{% url 'file_maintenance:user_maintenance' %}" class="active">User Maintenance</a>
+                <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <h2>Equipment Maintenance</h2>
+
+        <section class="form-container">
+            <h3>Edit Equipment</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="form-buttons">
+                    <button type="submit" class="btn-save">Save Changes</button>
+                    <button type="button" class="btn-cancel" onclick="redirectToEquipmentMaintenance()">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdown-menu");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        window.addEventListener("click", function (event) {
+            const dropdown = document.getElementById("dropdown-menu");
+            if (!event.target.closest(".admin-profile")) {
+                dropdown.style.display = "none";
+            }
+        });
+
+        function redirectToEquipmentMaintenance() {
+            window.location.href = "{% url 'file_maintenance:equipment_maintenance' %}";
+        }
+    </script>
+</body>
+
+</html>

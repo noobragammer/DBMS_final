@@ -22,8 +22,13 @@
             font-size: 14px;
         }
 
-        .navbar a:hover {
+        .navbar a.active {
+            font-weight: bold;
             color: #007bff;
+        }
+
+        .navbar a:hover {
+            color: #0056b3;
         }
     </style>
 </head>
@@ -43,18 +48,13 @@
                     <span>ADMIN</span>
                 </div>
                 <hr>
-                <a href="{% url 'inbox:profile' %}" class="dropdown-item">
-                    <i class="icon-profile"></i> Profile
-                </a>
-                <a href="#" class="dropdown-item">
-                    <i class="icon-settings"></i> Account Settings
-                </a>
-                <a href="{% url 'login:login' %}" class="dropdown-item logout">
-                    <i class="icon-logout"></i> Logout
-                </a>
+                <a href="{% url 'inbox:profile' %}" class="dropdown-item">Profile</a>
+                <a href="#" class="dropdown-item">Account Settings</a>
+                <a href="{% url 'login:login' %}" class="dropdown-item logout">Logout</a>
             </div>
         </div>
     </div>
+
     <div class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
         <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
@@ -64,7 +64,7 @@
         <div class="dropdown">
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
-                <a href="{% url 'file_maintenance:user_maintenance' %}" class="active">User Maintenance</a>
+                <a href="{% url 'file_maintenance:user_maintenance' %}">User Maintenance</a>
                 <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
             </div>
         </div>
@@ -75,10 +75,14 @@
         <form action="{% url 'file_maintenance:add_equipment' %}" method="get">
             <button type="submit" class="add-button">+ Add Equipment</button>
         </form>
-        <div class="search-filter">
-            <input type="text" class="search" placeholder="Search...">
-        </div>
 
+        <!-- Search Form -->
+        <form method="get" action="{% url 'file_maintenance:equipment_maintenance' %}" class="search-filter">
+            <input type="text" name="q" class="search" placeholder="Search..." value="{{ request.GET.q|default:'' }}">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Equipment Table -->
         <table class="equipment-table">
             <thead>
                 <tr>
@@ -92,71 +96,37 @@
                 </tr>
             </thead>
             <tbody>
+                {% for equipment in equipments %}
                 <tr>
-                    <td>1</td>
-                    <td>Keyboard</td>
-                    <td>Xyron Newell Relon</td>
-                    <td>Hardware</td>
-                    <td>Monthly</td>
-                    <td>Active</td>
+                    <td>{{ equipment.id }}</td>
+                    <td>{{ equipment.name }}</td>
+                    <td>{{ equipment.owner }}</td>
+                    <td>{{ equipment.get_category_display }}</td>
+                    <td>{{ equipment.get_frequency_display }}</td>
+                    <td>{{ equipment.get_status_display }}</td>
                     <td>
-                        <div class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
+                         <div class="action-buttons">
+                            <a href="{% url 'file_maintenance:edit_equipment' equipment.id %}" class="edit">Edit</a>
+                            <a href="{% url 'file_maintenance:delete_equipment' equipment.id %}" class="delete" onclick="return confirm('Are you sure you want to delete this equipment?');">Delete</a>
                         </div>
                     </td>
                 </tr>
-                <tr class="details">
-                    <td colspan="7">
-                        <p><strong>Name:</strong> Keyboard</p>
-                        <p><strong>Owner:</strong> Xyron Newell Relon</p>
-                        <p><strong>Category:</strong> Hardware</p>
-                        <p><strong>Frequency:</strong> Monthly</p>
-                        <p><strong>Status:</strong> Active</p>
-                        <div class="edit-actions">
-                            <button class="save">SAVE</button>
-                            <button class="cancel">CANCEL</button>
-                        </div>
-                    </td>
-                </tr>
+                {% empty %}
                 <tr>
-                    <td>2</td>
-                    <td>Microsoft Office</td>
-                    <td>Xyron Newell Relon</td>
-                    <td>Software</td>
-                    <td>Monthly</td>
-                    <td>Active</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </div>
-                    </td>
+                    <td colspan="7">No equipment found.</td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Aircon</td>
-                    <td>Xyron Newell Relon</td>
-                    <td>Utility</td>
-                    <td>Yearly</td>
-                    <td>Active</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                        </div>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
+
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById("dropdown-menu");
             dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        window.addEventListener("click", function (event) {
+        window.addEventListener("click", function(event) {
             const dropdown = document.getElementById("dropdown-menu");
             if (!event.target.closest(".admin-profile")) {
                 dropdown.style.display = "none";
