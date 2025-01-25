@@ -12,6 +12,7 @@ class LoginForm(forms.Form):
 
 
 class RegistrationForm(forms.ModelForm):
+    
     password = forms.CharField(
         max_length=255,
         min_length=8,
@@ -26,7 +27,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'contact_number', 'email_address', 'password', 'signature']
+        fields = ['first_name', 'last_name', 'username', 'contact_number', 'email_address', 'password', 'signature', 'role']
 
     def clean_contact_number(self):
         contact_number = self.cleaned_data.get('contact_number')
