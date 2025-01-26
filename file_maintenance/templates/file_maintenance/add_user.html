@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
     <link rel="stylesheet" href="{% static 'css/add_e.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
     <style>
         .navbar {
             background-color: #e3e3e3;
@@ -89,6 +90,7 @@
         <h2>User Maintenance</h2>
 
         <section class="form-container">
+            <form method="POST" enctype="multipart/form-data" >
             <h3>Add User</h3>
             {% csrf_token %}
             {% if messages %}
@@ -109,6 +111,7 @@
                     </ul>
                 </div>
             {% endif %}
+            
             <div class="form-group">
                 <label for="first_name">First Name</label>
                 <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
@@ -154,7 +157,6 @@
                 <button type="submit" class="btn">Create user</button>
             </div>
                 <div class="form-buttons">
-                    <button type="submit" class="btn-add">Add</button>
                     <button type="button" class="btn-cancel" onclick="redirectToUserMaintenance()">Cancel</button>
                 </div>
             </form>

@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ValidationError
 
 
-
 def user_maintenance_view(request):
     users = User.objects.all()
     return render(request, 'file_maintenance/user_maintenance.html', {'users': users})

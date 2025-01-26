@@ -1,15 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(../images/loginpic-blurred.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
 .container {
     display: flex;
     flex-direction: column; /* Stack sections vertically for better fit */
     align-items: center; /* Center align content */
     max-width: 100%; /* Full width to prevent overflow */
-    padding: 20px;
+    margin-top: 25px;
+    box-shadow: inset;
 }
 
 .form-section {
     width: 90%; /* Reduce width for smaller devices */
     max-width: 600px; /* Set maximum width for larger screens */
     padding: 15px; /* Reduce padding for compact layout */
+    background-color: white;
+    border: 2px solid black;
 }
 
 .form-section h1 {

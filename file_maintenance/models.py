@@ -34,6 +34,7 @@ class Equipment(models.Model):
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
     frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    date_commission = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.name
