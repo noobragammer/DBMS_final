@@ -87,38 +87,25 @@
                     <th>Date</th>
                     <th>Frequency</th>
                     <th>Status</th>
-                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
+                {% for item in equipment %}
                 <tr>
-                    <td>1</td>
-                    <td>Keyboard</td>
-                    <td>Hardware</td>
-                    <td>2024</td>
-                    <td>Monthly</td>
-                    <td>Active</td>
-                    <td><button>▼</button></td>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.date_commission }}</td>
+                    <td>{{ item.frequency }}</td>
+                    <td>{{ item.status }}</td>
                 </tr>
+                {% empty %}
                 <tr>
-                    <td>2</td>
-                    <td>Microsoft Office</td>
-                    <td>Software</td>
-                    <td>2024</td>
-                    <td>Monthly</td>
-                    <td>Active</td>
-                    <td><button>▼</button></td>
+                    <td colspan="7">No equipment found.</td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Aircon</td>
-                    <td>Utility</td>
-                    <td>2012</td>
-                    <td>Yearly</td>
-                    <td>Active</td>
-                    <td><button>▼</button></td>
-                </tr>
+                {% endfor %}
             </tbody>
+            
         </table>
     </div>
 

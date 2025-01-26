@@ -40,7 +40,7 @@ def edit_task(request, pk):
         messages.success(request, "Task updated successfully!")
 
         # Redirect to the Task Manager view
-        return redirect("task_manager:task_manager_view")
+        return redirect("task_manager:task_manager")
 
     # Render the edit form with the current task data
     context = {
@@ -53,7 +53,7 @@ def delete_task(request, pk):
     if request.method == 'POST':
         task.delete()
         messages.success(request, 'Task deleted successfully!')
-        return redirect('task_manager:task_manager_view')
+        return redirect('task_manager:task_manager')
     else:
         messages.error(request, 'Task deleted unsuccessful!')
-        return redirect('task_manager:task_manager_view')
+        return redirect('task_manager:task_manager')
