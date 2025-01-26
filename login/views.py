@@ -15,7 +15,8 @@ def login(request):
                 user = User.objects.get(username=username)
                 if user.check_password(password):
                     # Simulating login; replace with actual Django authentication if using default User
-                    request.session['user_id'] = user.id  # Use sessions for login management
+                    request.session['user_id'] = user.id
+                    request.session['role'] = user.role # Use sessions for login management
                     messages.success(request, "Login successful!")
                     return redirect('home:dashboard')  # Replace 'home' with the name of your main page
                 else:

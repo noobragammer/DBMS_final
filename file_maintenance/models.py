@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import timedelta, date
+from dateutil.relativedelta import relativedelta
 
 class Equipment(models.Model):
     SOFTWARE = 'software'
@@ -38,3 +40,25 @@ class Equipment(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def next_maintenance_date(self):
+        """Calculate the next maintenance date based on the frequency."""
+        if not self.date_commission:
+            return None
+
+        today = date.today()
+        delta = None
+
+        if self.frequency == self.WEEKLY:
+            delta = timedelta(weeks=1)
+        elif self.frequency == self.MONTHLY:
+            delta = relativedelta(months=1)
+        elif self.frequency == self.YEARLY:
+            delta = relativedelta(years=1)
+
+        if delta:
+            next_date = self.date_commission
+            while next_date <= today:
+                next_date += delta
+            return next_date
+        return None

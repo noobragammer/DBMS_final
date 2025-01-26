@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from .forms import TaskForm
 from .models import Task
+from django.views.decorators.csrf import csrf_exempt
 
 def task_manager_view(request):
     tasks = Task.objects.all()  # Fetch all tasks
@@ -57,3 +58,19 @@ def delete_task(request, pk):
     else:
         messages.error(request, 'Task deleted unsuccessful!')
         return redirect('task_manager:task_manager')
+
+@csrf_exempt
+def update_task_status(request, pk):
+    task = get_object_or_404(Task, id=pk)
+
+    if request.method == "POST":
+        new_status = request.POST.get("status")
+        if new_status in dict(Task._meta.get_field("status").choices):  # Validate status
+            task.status = new_status
+            task.save()
+            messages.success(request, "Task status updated successfully!")
+            return redirect('task_manager:task_manager')
+        else:
+            return JsonResponse({"success": False, "message": "Invalid status"})
+    
+    return JsonResponse({"success": False, "message": "Invalid request"})

@@ -38,10 +38,11 @@
         </div>
     </div>
 
-    <div class="navbar">
+    <nav class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
-        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task_manager' %}" class="active">Task Manager</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+    {% if request.session.role == 'Admin' %}
+        <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
         <a href="{% url 'reports_board:report' %}">Reports</a>
         <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
@@ -50,8 +51,9 @@
                 <a href="{% url 'file_maintenance:user_maintenance' %}">User Maintenance</a>
                 <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
             </div>
-        </div>
+    {%endif%}
     </div>
+</nav>
 
     <div class="content">
         <h2>Task Manager</h2>
@@ -76,31 +78,44 @@
             </thead>
             <tbody>
                 {% if tasks %}
-                    {% for task in tasks %}
-                        <tr>
-                            <td>{{ task.id }}</td>
-                            <td>{{ task.equipment_name }}</td>
-                            <td>{{ task.equipment_category }}</td>
-                            <td>{{ task.technician_name|default:"N/A" }}</td>
-                            <td>{{ task.priority }}</td>
-                            <td>{{ task.status }}</td>
-                            <td>
-                                <div class="action-buttons">
-                                    <a href="{% url 'task_manager:edit_task' task.id %}" class="edit">Edit</a>
-                                    <form method="post" action="{% url 'task_manager:delete_task' task.id %}" style="display:inline;">
-                                        {% csrf_token %}
-                                        <button type="submit" class="delete">Delete</button>
-                                    </form>
-
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
+                {% for task in tasks %}
                     <tr>
-                        <td colspan="7">No tasks available.</td>
+                        <td>{{ task.id }}</td>
+                        <td>{{ task.equipment_name }}</td>
+                        <td>{{ task.equipment_category }}</td>
+                        <td>{{ task.technician_name|default:"N/A" }}</td>
+                        <td>{{ task.priority }}</td>
+                        <td>{{ task.status }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <!-- Edit Task Link -->
+                                <a href="{% url 'task_manager:edit_task' task.id %}" class="edit">Edit</a>
+                                
+                                <!-- Delete Task Form -->
+                                <form method="post" action="{% url 'task_manager:delete_task' task.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="delete">Delete</button>
+                                </form>
+                                
+                                <!-- Update Status Form -->
+                                <form method="post" action="{% url 'task_manager:update_task_status' task.id %}" style="display:inline;">
+                                    {% csrf_token %}
+                                    <select name="status" class="status-dropdown">
+                                        <option value="Pending" {% if task.status == "Pending" %}selected{% endif %}>Pending</option>
+                                        <option value="Approved" {% if task.status == "Approved" %}selected{% endif %}>Approved</option>
+                                        <option value="Completed" {% if task.status == "Completed" %}selected{% endif %}>Completed</option>
+                                    </select>
+                                    <button type="submit" class="update">Update</button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
-                {% endif %}
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7">No tasks available.</td>
+                </tr>
+            {% endif %}
             </tbody>
         </table>
     </div>

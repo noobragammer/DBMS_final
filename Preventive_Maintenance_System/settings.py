@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'reports_board',
     'task_manager',
     'user_manager',
+    'django_celery_beat',
 ]
 
 
