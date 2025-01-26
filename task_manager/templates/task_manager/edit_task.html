@@ -38,7 +38,6 @@
     {% if request.session.role == 'Admin' %}
         <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
         <a href="{% url 'reports_board:report' %}">Reports</a>
-        <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
