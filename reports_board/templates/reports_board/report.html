@@ -35,7 +35,7 @@
         }
 
         #pie-chart {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
         }
     </style>
@@ -89,6 +89,35 @@
         <div class="chart-container">
             <img src="{{ chart_url }}" alt="Pie Chart">
         </div>
+        <h2>Completed Maintenance</h2>
+        
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Equipment Name</th>
+                    <th>Category</th>
+                    <th>Technician</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if tasks %}
+                {% for task in tasks %}
+                    <tr>
+                        <td>{{ task.id }}</td>
+                        <td>{{ task.equipment_name }}</td>
+                        <td>{{ task.equipment_category }}</td>
+                        <td>{{ task.technician_name|default:"N/A" }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="7">No tasks done.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+
     </div>
 
     <script>

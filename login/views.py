@@ -52,13 +52,15 @@ def forgot_password(request):
             
             try:
                 user = User.objects.get(username=username)
-                user.password = password  # The `save` method in the model will hash the password
+                user.password = password  # The `save` method will handle password hashing
                 user.save()
-                messages.success(request, "Password updated successfully. You can now log in.")
-                return redirect('login')  # Redirect to login page after password reset
+                messages.success(request, "Password updated successfully. Please log in.")
+                return redirect('login')
             except User.DoesNotExist:
-                messages.error(request, "User does not exist.")
+                messages.error(request, "Invalid username or details provided.")
+        else:
+            messages.error(request, "Invalid form submission. Please correct the errors.")
     else:
         form = ForgotPasswordForm()
 
-    return render(request, 'forgot_password.html', {'form': form})
+    return render(request, 'login/forgot_password.html', {'form': form})
