@@ -98,6 +98,7 @@
                     <th>Equipment Name</th>
                     <th>Category</th>
                     <th>Technician</th>
+                    <th>Date Completed</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,6 +109,7 @@
                         <td>{{ task.equipment_name }}</td>
                         <td>{{ task.equipment_category }}</td>
                         <td>{{ task.technician_name|default:"N/A" }}</td>
+                        <td>{{ task.date_completed }}</td>
                     </tr>
                 {% endfor %}
             {% else %}

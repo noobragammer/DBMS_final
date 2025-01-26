@@ -29,6 +29,9 @@ class Task(models.Model):
         ]
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    date_completed = models.DateTimeField(blank=True, null=True)    
+    
+    
 
     def __str__(self):
         return f"{self.equipment_name} - {self.priority}"
