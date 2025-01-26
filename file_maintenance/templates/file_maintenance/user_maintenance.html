@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             padding: 10px;
-            gap: 20px;  
+            gap: 20px;
         }
 
         .navbar a {
@@ -65,7 +65,7 @@
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
                 <a href="{% url 'file_maintenance:user_maintenance' %}" class="active">User Maintenance</a>
-                <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
+                <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
             </div>
         </div>
     </div>
@@ -92,49 +92,31 @@
                 </tr>
             </thead>
             <tbody>
+                {% for user in users %}
                 <tr>
-                    <td>1</td>
-                    <td>Gibe Bartolome</td>
-                    <td><a href="mailto:bartolome@gmail.com">bartolome@gmail.com</a></td>
-                    <td>09171234567</td>
-                    <td>Admin</td>
-                    <td><img src="{% static 'images/signature.png' %}" alt="Signature"></td>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                    <td>{{ user.contact_number }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        {% if user.signature %}
+                            <img src="{{ user.signature.url }}" alt="Signature">
+                        {% else %}
+                            No Signature
+                        {% endif %}
+                    </td>
                     <td>
                         <div class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="view">View</button>
-                            <button class="delete">Delete</button>
+                            <a href="{% url 'file_maintenance:edit_user' user.id %}" class="edit">Edit</a>
+                            <form action="{% url 'file_maintenance:delete_user' user.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="delete">Delete</button>
+                            </form>
                         </div>
                     </td>
                 </tr>
-                <tr class="details">
-                    <td colspan="7">
-                        <p><strong>First Name:</strong> Gibe</p>
-                        <p><strong>Last Name:</strong> Bartolome</p>
-                        <p><strong>Email:</strong> <a href="mailto:bartolome@gmail.com">bartolome@gmail.com</a></p>
-                        <p><strong>Contact no.:</strong> 09171234567</p>
-                        <p><strong>Role:</strong> Admin</p>
-                        <p><strong>Username:</strong> admin</p>
-                        <p><strong>Password:</strong> *******</p>
-                        <p><strong>Signature:</strong> <img src="{% static 'images/signature.png' %}" alt="Signature"></p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Xyron Newell Y. Relon</td>
-                    <td><a href="mailto:relon@gmail.com">relon@gmail.com</a></td>
-                    <td>09181234567</td>
-                    <td>User</td>
-                    <td><img src="{% static 'images/signature.png' %}" alt="Signature"></td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="edit">Edit</button>
-                            <button class="view">View</button>
-                            <button class="delete">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Add more rows as necessary -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
@@ -144,7 +126,7 @@
             dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
         }
 
-        window.addEventListener("click", function (event) {
+        window.addEventListener("click", function(event) {
             const dropdown = document.getElementById("dropdown-menu");
             if (!event.target.closest(".admin-profile")) {
                 dropdown.style.display = "none";

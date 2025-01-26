@@ -4,19 +4,66 @@ from login.models import User
 from .models import Equipment
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ValidationError
 
-users = User.objects.all()
+
 
 def user_maintenance_view(request):
-    # Example data for user maintenance
+    users = User.objects.all()
     return render(request, 'file_maintenance/user_maintenance.html', {'users': users})
 
 def add_user(request):
     if request.method == 'POST':
-        # Handle the form submission logic here (if needed)
-        # For now, simply render the page without processing
-        pass
+        data = request.POST
+        try:
+            user = User(
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                username=data['username'],
+                email_address=data['email_address'],
+                contact_number=data['contact_number'],
+                password=data['password'],
+                role=data['role'],
+                signature=request.FILES.get('signature', None),
+            )
+            user.full_clean()
+            user.save()
+            messages.success(request, "User added successfully!")
+            return redirect('file_maintenance:user_maintenance')
+        except ValidationError as e:
+            messages.error(request, f"Error: {e.message_dict}")
     return render(request, 'file_maintenance/add_user.html')
+
+def edit_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        data = request.POST
+        try:
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.username = data['username']
+            user.email_address = data['email_address']
+            user.contact_number = data['contact_number']
+            user.role = data['role']
+            if 'password' in data and data['password']:
+                user.password = data['password']
+            if 'signature' in request.FILES:
+                user.signature = request.FILES['signature']
+            user.full_clean()
+            user.save()
+            messages.success(request, "User updated successfully!")
+            return redirect('file_maintenance:user_maintenance')
+        except ValidationError as e:
+            messages.error(request, f"Error: {e.message_dict}")
+    return render(request, 'file_maintenance/edit_user.html', {'user': user})
+
+def delete_user(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == 'POST':
+        user.delete()
+        messages.success(request, "User deleted successfully!")
+        return redirect('file_maintenance:user_maintenance')
+    return render(request, 'file_maintenance/user_maintenance.html', {'user': user})
 
 def equipment_maintenance_view(request):
     equipments = Equipment.objects.all()
