@@ -280,3 +280,36 @@ h2 {
         justify-content: center;
     }
 }
+
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-table th, .task-table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.task-table th {
+    background-color: #f2f2f2;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.task-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.task-table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.task-table a:hover {
+    text-decoration: underline;
+}

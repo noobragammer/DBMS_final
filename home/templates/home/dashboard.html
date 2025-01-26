@@ -38,12 +38,22 @@
         </div>
         <h1>Preventive Maintenance System</h1>
         <div class="admin-profile">
+            {% if request.session.role == 'Admin' %}
             <span>ADMIN</span>
-            <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="profile-icon" onclick="toggleDropdown()">
+            {%endif%}
+            {% if request.session.role == 'Technician' %}
+            <span>TECH</span>
+            {%endif%}
+            <img src="{% static 'images/profile.png' %}" alt="Profile" class="profile-icon" onclick="toggleDropdown()">
             <div id="dropdown-menu" class="dropdown-menu">
                 <div class="dropdown-header">
                     <img src="{% static 'images/profile.png' %}" alt="Admin Profile" class="dropdown-profile-icon">
+                    {% if request.session.role == 'Admin' %}
                     <span>ADMIN</span>
+                    {%endif%}
+                    {% if request.session.role == 'Technician' %}
+                    <span>TECH</span>
+                    {%endif%}
                 </div>
                 <hr>
                 <a href="{% url 'inbox:profile' %}" class="dropdown-item">

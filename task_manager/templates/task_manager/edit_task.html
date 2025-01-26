@@ -84,4 +84,21 @@
     </div>
 </body>
 
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("dropdown-menu");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("dropdown-menu");
+        if (!event.target.closest(".admin-profile")) {
+            dropdown.style.display = "none";
+        }
+    });
+
+    function redirectToTaskManager() {
+        window.location.href = "{% url 'task_manager:task_manager' %}";
+    }
+</script>
 </html>

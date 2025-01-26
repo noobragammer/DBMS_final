@@ -6,7 +6,7 @@ from .models import Task
 from django.views.decorators.csrf import csrf_exempt
 
 def task_manager_view(request):
-    tasks = Task.objects.all()  # Fetch all tasks
+    tasks = Task.objects.filter(status__in=['Pending', 'Approved'])
     return render(request, 'task_manager/task.html', {'tasks': tasks})
 
 def add_task(request):

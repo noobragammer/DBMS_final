@@ -86,6 +86,7 @@
                         <td>{{ task.priority }}</td>
                         <td>{{ task.status }}</td>
                         <td>
+                            {% if request.session.role == 'Admin' %}
                             <div class="action-buttons">
                                 <!-- Edit Task Link -->
                                 <a href="{% url 'task_manager:edit_task' task.id %}" class="edit">Edit</a>
@@ -95,7 +96,7 @@
                                     {% csrf_token %}
                                     <button type="submit" class="delete">Delete</button>
                                 </form>
-                                
+                                {%endif%}
                                 <!-- Update Status Form -->
                                 <form method="post" action="{% url 'task_manager:update_task_status' task.id %}" style="display:inline;">
                                     {% csrf_token %}
@@ -119,5 +120,21 @@
         </table>
     </div>
 </body>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("dropdown-menu");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
 
+    window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("dropdown-menu");
+        if (!event.target.closest(".admin-profile")) {
+            dropdown.style.display = "none";
+        }
+    });
+
+    function redirectToTaskManager() {
+        window.location.href = "{% url 'task_manager:task_manager' %}";
+    }
+</script>
 </html>

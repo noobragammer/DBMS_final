@@ -77,37 +77,44 @@
     <div class="profile-content">
         <h2>Profile</h2>
         <div class="profile-header">
-            <img src="{% static 'images/profile.png' %}" alt="Profile Picture">
+            <img src="{% if user.signature %}{{ user.signature.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="Profile Picture">
             <div>
-                <h3>Gibe Bartolome</h3>
-                <p>bartolome@gmail.com</p>
+                <h3>{{ user.first_name }} {{ user.last_name }}</h3>
+                <p>{{ user.email_address }}</p>
             </div>
         </div>
-        <form class="account-form">
+        <form method="post" enctype="multipart/form-data" class="account-form">
+            {% csrf_token %}
             <fieldset>
-                <legend>Account</legend>
+                <legend>Account Information</legend>
                 <label for="first-name">First Name</label>
-                <input type="text" id="first-name" value="Gibe">
+                <input type="text" id="first-name" name="first_name" value="{{ user.first_name }}">
 
                 <label for="last-name">Last Name</label>
-                <input type="text" id="last-name" value="Bartolome">
+                <input type="text" id="last-name" name="last_name" value="{{ user.last_name }}">
 
-                <label for="email">Email</label>
-                <input type="email" id="email" value="bartolome@gmail.com">
+                <label for="email-address">Email Address</label>
+                <input type="email" id="email-address" name="email_address" value="{{ user.email_address }}">
 
-                <label for="contact">Contact</label>
-                <input type="text" id="contact" value="09171234567">
+                <label for="contact-number">Contact Number</label>
+                <input type="text" id="contact-number" name="contact_number" value="{{ user.contact_number }}">
 
                 <label for="role">Role</label>
-                <input type="text" id="role" value="Admin" readonly>
+                <input type="text" id="role" value="{{ user.role }}" readonly>
 
                 <label for="username">Username</label>
-                <input type="text" id="username" value="admin">
+                <input type="text" id="username" name="username" value="{{ user.username }}">
 
                 <label for="password">Password</label>
-                <input type="password" id="password" value="*******">
+                <input type="password" id="password" name="password" value="*******">
+
+                <label for="signature">Signature</label>
+                <input type="file" id="signature" name="signature">
             </fieldset>
+            <button type="submit">Save Changes</button>
         </form>
+    </div>
+
     </div>
 
     <script>
