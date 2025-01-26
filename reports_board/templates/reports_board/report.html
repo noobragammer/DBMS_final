@@ -8,6 +8,7 @@
     <title>Reports</title>
     <link rel="stylesheet" href="{% static 'css/report.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'images/logo.png' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN -->
     <style>
         .navbar {
             background-color: #e3e3e3;
@@ -25,6 +26,17 @@
 
         .navbar a:hover {
             color: #007bff;
+        }
+
+        .chart-container {
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #pie-chart {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -56,74 +68,30 @@
             </div>
         </div>
     </div>
-    <div class="navbar">
+    <nav class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
-        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
-        <a href="{% url 'task_manager:task_manager' %}" class="active">Task Manager</a>
-        <a href="{% url 'reports_board:report' %}" class="active">Reports</a>
-        <a href="{% url 'user_manager:user' %}" class="active">User Manager</a>
+        <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+    {% if request.session.role == 'Admin' %}
+        <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
+        <a href="{% url 'reports_board:report' %}">Reports</a>
+        <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
             <button class="dropbtn">File Maintenance</button>
             <div class="dropdown-content">
-                <a href="{% url 'file_maintenance:user_maintenance' %}" class="active">User Maintenance</a>
-                <a href="{% url 'file_maintenance:equipment_maintenance' %}" class="active">Equipment Maintenance</a>
+                <a href="{% url 'file_maintenance:user_maintenance' %}">User Maintenance</a>
+                <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
             </div>
-        </div>
+    {%endif%}
     </div>
+</nav>
 
     <div class="content">
         <h2>Reports</h2>
-        <div class="search-filter">
-            <input type="text" class="search" placeholder="Search..." class="search-bar">
-        </div>
-
-        <table class="report-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Equipment</th>
-                    <th>Category</th>
-                    <th>Request Form</th>
-                    <th>Technician</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Maintenance Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Xyron Newell Y. Relon</td>
-                    <td>Keyboard</td>
-                    <td>Hardware</td>
-                    <td><a href="#">request.pdf</a></td>
-                    <td>Jaffy Myll Fuentes</td>
-                    <td>Low</td>
-                    <td>Approved</td>
-                    <td>-</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="view">View</button>
-                            <button class="delete">Delete</button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="details">
-            <p><strong>Name:</strong> Xyron Newell Y. Relon</p>
-            <p><strong>Equipment:</strong> Keyboard</p>
-            <p><strong>Category:</strong> Hardware</p>
-            <p><strong>Request Form:</strong> <a href="#">request.pdf</a></p>
-            <p><strong>Technician:</strong> Jaffy Myll Fuentes</p>
-            <p><strong>Priority:</strong> Low</p>
-            <p><strong>Status:</strong> Approved</p>
-            <p><strong>Maintenance Date:</strong> -</p>
+        <div class="chart-container">
+            <img src="{{ chart_url }}" alt="Pie Chart">
         </div>
     </div>
+
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById("dropdown-menu");
@@ -134,6 +102,28 @@
             const dropdown = document.getElementById("dropdown-menu");
             if (!event.target.closest(".admin-profile")) {
                 dropdown.style.display = "none";
+            }
+        });
+
+        // Render the pie chart
+        const ctx = document.getElementById('pie-chart').getContext('2d');
+        const pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Low Priority', 'Medium Priority', 'High Priority'],
+                datasets: [{
+                    data: [12, 19, 7], // Replace with your data
+                    backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
             }
         });
     </script>

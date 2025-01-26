@@ -73,8 +73,9 @@
     </div>
     <nav class="navbar">
         <a href="{% url 'home:dashboard' %}">Home</a>
-        <a href="{% url 'equipment_manager:equipment' %}">Equipment</a>
         <a href="{% url 'task_manager:task_manager' %}">Task Manager</a>
+    {% if request.session.role == 'Admin' %}
+        <a href="{% url 'equipment_manager:equipment' %}" class="active">Equipment</a>
         <a href="{% url 'reports_board:report' %}">Reports</a>
         <a href="{% url 'user_manager:user' %}">User Manager</a>
         <div class="dropdown">
@@ -83,7 +84,7 @@
                 <a href="{% url 'file_maintenance:user_maintenance' %}">User Maintenance</a>
                 <a href="{% url 'file_maintenance:equipment_maintenance' %}">Equipment Maintenance</a>
             </div>
-        </div>
+    {%endif%}
     </nav>
 
     <main>
