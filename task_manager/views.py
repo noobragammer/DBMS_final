@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import TaskForm
 from .models import Task
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.timezone import now
 
 def task_manager_view(request):
     tasks = Task.objects.filter(status__in=['Pending', 'Approved'])
@@ -66,6 +67,8 @@ def update_task_status(request, pk):
     if request.method == "POST":
         new_status = request.POST.get("status")
         if new_status in dict(Task._meta.get_field("status").choices):  # Validate status
+            if new_status == "Completed" and task.status != "Completed":
+                task.date_completed = now()
             task.status = new_status
             task.save()
             messages.success(request, "Task status updated successfully!")
