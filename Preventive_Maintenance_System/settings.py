@@ -126,6 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/' # Where your app's static files are located
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = BASE_DIR / 'staticfiles'   # Directory where static files will be collected
 
 

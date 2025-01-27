@@ -48,40 +48,62 @@
     </div>
 </nav>
 
-    <div class="content">
-        <h2>Edit Task</h2>
-        <form method="post" action="{% url 'task_manager:edit_task' task.id %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="equipment_name">Equipment Name:</label>
-                <input type="text" id="equipment_name" name="equipment_name" value="{{ task.equipment_name }}" required>
-            </div>
+<div class="content">
+    <h2>Edit Task</h2>
+    <form method="post" action="{% url 'task_manager:edit_task' task.id %}">
+        {% csrf_token %}
+        
+        <!-- Equipment Name -->
+        <div class="form-group">
+            <label for="equipment_name">Equipment Name</label>
+            <input type="text" id="equipment_name" name="equipment_name" value="{{ task.equipment_name }}" required>
+        </div>
 
-            <div class="form-group">
-                <label for="equipment_category">Category:</label>
-                <input type="text" id="equipment_category" name="equipment_category" value="{{ task.equipment_category }}" required>
-            </div>
+        <!-- Equipment Category -->
+        <div class="form-group">
+            <label for="equipment_category">Equipment Category</label>
+            <input type="text" id="equipment_category" name="equipment_category" value="{{ task.equipment_category }}" required>
+        </div>
 
-            <div class="form-group">
-                <label for="technician_name">Technician:</label>
-                <input type="text" id="technician_name" name="technician_name" value="{{ task.technician_name|default:'' }}">
-            </div>
+        <!-- Technician Name -->
+        <div class="form-group">
+            <label for="technician_name">Technician Name</label>
+            <input type="text" id="technician_name" name="technician_name" value="{{ task.technician_name }}" placeholder="Optional">
+        </div>
 
-            <div class="form-group">
-                <label for="priority">Priority:</label>
-                <select id="priority" name="priority" required>
-                    <option value="Low" {% if task.priority == "Low" %}selected{% endif %}>Low</option>
-                    <option value="Medium" {% if task.priority == "Medium" %}selected{% endif %}>Medium</option>
-                    <option value="High" {% if task.priority == "High" %}selected{% endif %}>High</option>
-                </select>
-            </div>
+        <!-- Priority -->
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select id="priority" name="priority" required>
+                <option value="Low" {% if task.priority == "Low" %}selected{% endif %}>Low</option>
+                <option value="Medium" {% if task.priority == "Medium" %}selected{% endif %}>Medium</option>
+                <option value="High" {% if task.priority == "High" %}selected{% endif %}>High</option>
+            </select>
+        </div>
 
-            <div class="form-buttons">
-                <button type="submit" class="save-button">Save Changes</button>
-                <a href="{% url 'task_manager:task_manager' %}" class="cancel-button">Cancel</a>
-            </div>
-        </form>
-    </div>
+        <!-- Status -->
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                <option value="Pending" {% if task.status == "Pending" %}selected{% endif %}>Pending</option>
+                <option value="In Progress" {% if task.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                <option value="Completed" {% if task.status == "Completed" %}selected{% endif %}>Completed</option>
+            </select>
+        </div>
+
+        <!-- Comment -->
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment" placeholder="Add any relevant comments...">{{ task.comment }}</textarea>
+        </div>
+
+        <!-- Form Buttons -->
+        <div class="form-buttons">
+            <button type="submit" class="save-button">Save Changes</button>
+            <a href="{% url 'task_manager:task_manager' %}" class="cancel-button">Cancel</a>
+        </div>
+    </form>
+</div>
 </body>
 
 <script>

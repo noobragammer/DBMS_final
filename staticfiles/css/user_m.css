@@ -170,19 +170,26 @@ h2 {
     margin-bottom: 10px;
 }
 
+.add-user {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-user:hover {
+    background-color: #0056b3;
+}
 
 .search-filter {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.search-bar {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 .search-filter .search {
@@ -193,7 +200,7 @@ h2 {
     margin-right: 10px;
 }
 
-.equipment-table {
+.user-table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
@@ -202,34 +209,51 @@ h2 {
     margin-bottom: 20px;
 }
 
-.equipment-table th,
-.equipment-table td {
+.user-table th, .user-table td {
     text-align: left;
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
 
-.equipment-table th {
+.user-table th {
     background-color: #f2f2f2;
     font-size: 14px;
     text-transform: uppercase;
 }
 
-.equipment-table tbody tr:hover {
+.user-table tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-.report-table tbody tr:hover {
-    background-color: #f9f9f9;
+.user-table img {
+    width: 50px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.equipment-table button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
+.action-buttons button {
+    background-color: transparent;
     border: none;
-    border-radius: 4px;
+    color: #007bff;
     cursor: pointer;
+    margin-right: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+    background-color: #e7f3ff;
+}
+
+.action-buttons .delete {
+    color: #ff4d4d;
+}
+
+.action-buttons .delete:hover {
+    background-color: #ffe7e7;
 }
 
 /* Media Queries */
@@ -239,4 +263,3 @@ h2 {
         justify-content: center;
     }
 }
-

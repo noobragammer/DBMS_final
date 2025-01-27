@@ -170,19 +170,26 @@ h2 {
     margin-bottom: 10px;
 }
 
+.add-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
 
 .search-filter {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-bottom: 20px;
-}
-
-.search-bar {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
 }
 
 .search-filter .search {
@@ -202,8 +209,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.equipment-table th,
-.equipment-table td {
+.equipment-table th, .equipment-table td {
     text-align: left;
     padding: 10px;
     border-bottom: 1px solid #ccc;
@@ -219,17 +225,75 @@ h2 {
     background-color: #f9f9f9;
 }
 
-.report-table tbody tr:hover {
-    background-color: #f9f9f9;
+.equipment-table .action-buttons {
+    display: flex;
+    gap: 5px;
 }
 
-.equipment-table button {
+.equipment-table .action-buttons button {
+    background-color: transparent;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
     padding: 5px 10px;
-    background-color: #007bff;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.equipment-table .action-buttons button:hover {
+    background-color: #e7f3ff;
+}
+
+.equipment-table .action-buttons .delete {
+    color: #ff4d4d;
+}
+
+.equipment-table .action-buttons .delete:hover {
+    background-color: #ffe7e7;
+}
+
+.details {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+}
+
+.details p {
+    margin: 5px 0;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-actions .save {
+    background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 4px;
+    padding: 5px 10px;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+.edit-actions .save:hover {
+    background-color: #218838;
+}
+
+.edit-actions .cancel {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-actions .cancel:hover {
+    background-color: #c82333;
 }
 
 /* Media Queries */
@@ -239,4 +303,3 @@ h2 {
         justify-content: center;
     }
 }
-

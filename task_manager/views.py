@@ -29,11 +29,13 @@ def edit_task(request, pk):
 
     if request.method == "POST":
         # Update task fields with form data
+        
         task.equipment_name = request.POST.get("equipment_name")
         task.equipment_category = request.POST.get("equipment_category")
         task.technician_name = request.POST.get("technician_name", "")  # Optional field
         task.priority = request.POST.get("priority")
         task.status = request.POST.get("status")
+        task.comment = request.POST.get("comment")
 
         # Save the task to the database
         task.save()
